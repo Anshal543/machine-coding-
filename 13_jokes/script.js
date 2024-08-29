@@ -2,7 +2,7 @@ const url = "https://api.chucknorris.io/jokes/random";
 const displayJoke = document.getElementById("display-joke");
 const btn = document.getElementById("getJoke");
 
-btn.addEventListener("click", randomJoke);
+btn.addEventListener("click", randomJoke); // in race condition api will hit multiple time but you will show the latest respose
 
 let latestJoke = 0;
 function randomJoke() {
