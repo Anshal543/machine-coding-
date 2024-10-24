@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Throttling Example</title>
+</head>
+<body>
+  <button id="clickMeButton">Click Me</button>
+  <p id="message"></p>
+
+  <script>
+    // Throttle function
+    function throttle(func, limit) {
+      let inThrottle;
+      return function(...args) {
+        if (!inThrottle) {
+          func.apply(this, args);
+          inThrottle = true;
+          setTimeout(() => inThrottle = false, limit);
+        }
+      };
+    }
+
+    // Function to be throttled
+    function handleClick() {
+      document.getElementById('message').innerText = 'Button clicked!';
+      console.log('API call or heavy operation triggered');
+    }
+
+    // Apply throttling to the button click event
+    const button = document.getElementById('clickMeButton');
+    button.addEventListener('click', throttle(handleClick, 2000)); // Throttled to allow clicks every 2 seconds
+  </script>
+</body>
+</html>
